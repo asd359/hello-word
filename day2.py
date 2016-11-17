@@ -6,6 +6,20 @@ for name in names :
     print name
 
 fib = [0,1]
+
+
+a = 5
+
+def add():
+    a = 10
+    print a
+
+print a
+add()
+print  a
+
+
+
 '''
 for i in range(40):
     fib.append(fib[-1]+fib[-2])
