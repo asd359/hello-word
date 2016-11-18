@@ -36,7 +36,6 @@ def sum(startInt,endInt):
         s += i
     return s
 
+print '\n\n1 - 100 和为：',sum(1,100)
 
-print '\n\n1 - 100 和为：',sum(1,3)
-
-
+print  "----------------------"
