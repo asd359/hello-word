@@ -1,12 +1,12 @@
 #coding:utf-8
 
-def fun_max(m):
-    print m
-    if  m > 0:
-        print fun_max(m-1)
-    return m
-
-print fun_max(4)
+# def fun_max(m):
+#     print m
+#     if  m > 0:
+#         print fun_max(m-1)
+#     return m
+#
+# print fun_max(4)
 
 
 # def  funSum(start,end):
@@ -61,6 +61,50 @@ print fun_max(4)
 # print '外部变量b：',b
 
 
-# def calc(obj):
+print 'clac--------------\n'
+str = '1+39+4+6'
+a = 1
+b = 39
+cout = {'+': a + b, '-': a - b, '*': a * b, '/': a / b}
+
+
+import re
+lsNum = re.split('\+|\-|\*|\/|\(|\)',str)
+lsCout = re.split('1|2|3|4|5|6|7|8|9|0',str)
+
+def delLs(list,delData):
+    newLs = []
+    for i in range(len(list)):
+        if list[i] != delData:
+            newLs.append(list[i])
+    return newLs
+
+lsNum = delLs(lsNum,"")
+lsCout = delLs(lsCout,"")
+
+
+print lsNum
+print lsCout
+
+
+def calc(num):
+    # if num == len(lsCout) - 1:
+    #     return
+    if num == len(lsCout) - 1:
+        return lsNum[-1]
+    a = lsNum[num]
+    b = lsNum[num+1]
+    print  a , b
+    print cout[lsCout[num]]
+    lsNum[num + 1] = cout[lsCout[num]]
+
+    calc(num+1)
+
+
+
+calc(0)
+
+
+# calc()
 
 
