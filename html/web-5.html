@@ -5,26 +5,72 @@
     <title>web-5</title>
     <style>
         div.dd{
-            width: 300px;
-            height: 300px;
-            border:10px solid #ff6072;
+            width: 600px;
+            height: 600px;
+            border:10px solid #ff6c77;
             margin-bottom: 20px;
+            /*-webkit-animation: circle 1s infinite linear;*/
         }
-        div.ee{
-            width: 50px;
-            height: 70px;
-            background-color: #69ffcc;
-            margin-bottom: 60px;
-            margin-top: 80px;
+        @-webkit-keyframes circle{
+        0%{ transform:rotate(0deg); }
+        100%{ transform:rotate(-360deg); }
         }
+
+
+
+        div.d1{
+            width: 40px;
+            height: 160px;
+            background-color: #eff0f6;
+            /*margin-bottom: 60px;*/
+            margin-top: 160px;
+            margin-left:240px;
+            float: left;
+        }
+        div.d2{
+            width: 160px;
+            height: 40px;
+            background-color: #ccffde;
+            margin-top: 240px;
+            margin-left:280px;
+        }
+        div.d3{
+            width: 40px;
+            height: 160px;
+
+            background-color: #d4cff6;
+            /*margin-top: 40px;*/
+            margin-left:40px;
+            float: left;
+        }
+
+        div.d4{
+            width: 160px;
+            height: 40px;
+            background-color: #74ffdd;
+            margin-top: 40px;
+            margin-left: 160px;
+
+        }
+
+
     </style>
 </head>
 <body>
     <h3>CSS央视之外补白（外补丁）</h3>
     <div class="dd">
-        <div class="ee">
+        <div class="d1">        </div>
+        <div class="d2"></div>
+        <div class="d3"></div>
+        <div class="d4"></div>
+    </div>
 
-        </div>
+    <div class="car">
+        <a href="www.baidu.com">baidu</a>
+        <div class="c1"></div>
+        <div calss="c2"></div>
+        <div calss="c3"></div>
+        <div calss="c4"></div>
     </div>
 </body>
 </html>
