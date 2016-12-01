@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script>
+        function check() {
+            var list = document.getElementsByName("lis");
+
+                if(document.getElementById("btu").innerHTML == "全选"){
+                    for( var i in list){
+                    list[i].checked = true;
+//                        alert(list[i].innerHTML)
+                    }
+                    document.getElementById("btu").innerHTML = "全bu选";
+            }
+            else {
+                     for( var i in list){
+                    list[i].checked = false;
+                    }
+                    document.getElementById("btu").innerHTML = "全选";
+                }
+
+
+
+        }
+
+    </script>
+</head>
+<body>
+    <div>
+        <ul>
+            <li><input type="checkbox" name="lis" >hahha</li>
+            <li><input type="checkbox" name="lis">hhhhh</li>
+            <li><input type="checkbox" name="lis">gggggg</li>
+            <li><input type="checkbox" name="lis" >yyyyyyy</li>
+        </ul>
+    </div>
+
+
+        <button onclick="check()" id="btu"   >全不选</button>
+</body>
+</html>
