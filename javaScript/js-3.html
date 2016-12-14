@@ -2,9 +2,57 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>时间戳</title>
+    <title>时间戳转换</title>
+    <script>
+        function doIt() {
+
+            var sp =  document.getElementById("inPut").value;
+//            alert(sp);
+            var sp2 =  sp.split(/-| |:/);
+//            alert(sp2);
+            var yy = parseInt(sp2[0]);
+            var mm = parseInt(sp2[1]);
+            var dd =parseInt(sp2[2]);
+            var hh =parseInt(sp2[3]);
+            var min =parseInt(sp2[4]);
+            var ss = parseInt(sp2[5]);
+//            alert(yy+' '+ss);
+            _day_=0;
+            for (var i=1970;i<yy;i++ ){
+                if ((i % 4 == 0) && (i % 100 != 0 || i % 400 == 0) ){
+                    _day_ += 366;
+                }
+                else {
+                    _day_ += 365;
+                }
+            }
+            if ((yy % 4 == 0) && (yy % 100 != 0 || yy % 400 == 0) )
+                _day_ +=1;
+
+            tt = [1,31,28,31,30,31,30,31,31,30,31,30,31];
+            for (var i=1;i<mm;i++){
+                _day_+=tt[i];
+            }
+            _day_ +=dd;
+
+            var a = new Array("三","四", "五", "六","日", "一", "二");  
+            var str = "这一天是星期"+ a[_day_%7]; 
+
+            document.getElementById("tm").innerHTML = str+"     时间戳shi：" +_day_*(24+hh)*(60+min)+ss;
+        }
+
+
+    </script>
 </head>
 <body>
+    <div>
+        <ul>
+            <li><input type="text" id="inPut" style="background-color: #69ffcc
+            width: 500px" value="2015-06-05 12:24:36"  >输入时间 ：2015-06-01 12:24:36 </li>
+            <h1 id="tm"></h1>
+            <button onclick="doIt()"  style=" background-color: #acffc3" >点击转换</button>
+        </ul>
+    </div>
 
 </body>
 </html>

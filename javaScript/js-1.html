@@ -3,18 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+
+<!-- 可选的Bootstrap主题文件（一般不用引入） -->
+<!--<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">-->
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+
 
 </head>
 <body>
     <h3>js中的节点操作</h3>
     <input type="text" id="m1"  name="num" >
     <button onclick=doClick()>获取</button>
+    <div  style="height: 300px;width: 300px;background-color: #69ffcc">
+        <button onclick="start()" style="margin-top: 100px;margin-left: 100px" id="btuNum"  type="button" class="btn btn-success">倒计时</button>
+    </div>
     <script>
         function doClick(){
             var  obj = document.getElementById("m1")
             alert("输入是："+obj.value)
-        }
 
+        }
+        var  t1;
+        var num1 = 10;
+        function num() {
+//            alert("num()");
+            if (num1 == -1){
+                document.getElementById("btuNum").className = "btn btn-default";
+                document.getElementById("btuNum").innerHTML ="重新倒计时";
+                window.clearInterval(t1);
+                return;
+            }
+            document.getElementById("btuNum").innerHTML ="剩余时间：" +num1--;
+        }
+//        document.getElementById("btuNum").onclick =start();
+        function start() {
+            if (num1<0){
+                num1 =10;
+                document.getElementById("btuNum").className = "btn btn-success";
+                document.getElementById("btuNum").innerHTML ="倒计时";
+                window.clearInterval(t1);
+            }
+            else {
+                t1=window.setInterval("num()",1000);
+            }
+
+
+
+        }
     </script>
 
 </body>
