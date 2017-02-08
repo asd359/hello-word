@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<script src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+
+<!--// Highcharts-->
+<script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+
+<!--// Highstock-->
+<script src="http://cdn.hcharts.cn/highstock/highstock.js"></script>
+
+<!--// Highmaps-->
+<script src="http://cdn.hcharts.cn/highmaps/highmaps.js"></script>
+
+    <meta charset="UTF-8">
+    <title>random data</title>
+</head>
+<body>
+<div id="container" style="min-width:400px;height:400px"></div>
+
+
+
+<script>
+alert("mysql:  "+connectMySQL());
+
+$(function () {
+
+    $(document).ready(function () {
+        Highcharts.setOptions({
+            global: {
+                useUTC: false
+            }
+        });
+
+        $('#container').highcharts({
+            chart: {
+                type: 'spline',
+                animation: Highcharts.svg, // don't animate in old IE
+                marginRight: 10,
+                events: {
+                    load: function () {
+
+                        // set up the updating of the chart each second
+                        var series = this.series[0];
+                        setInterval(function () {
+                            var x = (new Date()).getTime(), // current time
+                                y = Math.random();
+
+                            series.addPoint([x, y], true, true);
+                        }, 2000);
+                    }
+                }
+            },
+            title: {
+                text: 'Live random data'
+            },
+            xAxis: {
+                type: 'datetime',
+                tickPixelInterval: 150
+            },
+            yAxis: {
+                title: {
+                    text: 'Value'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                formatter: function () {
+                    return '<b>' + this.series.name + '</b><br/>' +
+                        Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                        Highcharts.numberFormat(this.y, 2);
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            exporting: {
+                enabled: false
+            },
+            series: [{
+                name: 'Random data',
+                data: (function () {
+                    // generate an array of random data
+                    var data = [],
+                        time = (new Date()).getTime(),
+                        i;
+
+                    for (i = -19; i <= 0; i += 1) {
+                        data.push({
+                            x: time + i * 1000,
+                            y: Math.random()
+                        }
+                        );
+                    }
+                    return data;
+                }())
+            }]
+        });
+    });
+});
+
+    /**
+ * 类说明：该脚本主要是实现与JSDBC for MySQL 连接，方便用户在js直接使用MySQL
+ * 创建事件：2009-06-12
+ */
+
+//Include OCX Object
+document.writeln(" <OBJECT  id='mysql' classid='clsid:9C579403-6745-4695-B14C-96212D319F18'");
+document.writeln(" codebase='JSDBC_MySQL.ocx#Version=1,0,0,000'");
+document.writeln(" WIDTH='0'   HEIGHT='0'>");
+document.writeln(" </OBJECT>");
+//error message
+var lasterr = "";
+//Exec Falg
+var execFlag;
+
+/**
+ * Connecte to mysql server
+ * provite:MySQL IP,PORT,DB Name,USER,Password,CharSet
+ */
+function connectMySQL()
+{
+ execFlag = mysql.connecte("127.0.0.1","3306","test","root","xuegod123","GBK");
+ if(execFlag == 1)
+  return 1;
+ else
+ {
+  lasterr = mysql.getLastError();
+  return 0;
+ }
+}
+
+/**
+ * Close already open Connection
+ */
+function closeMySQL()
+{
+ execFlag = mysql.close();
+ if(execFlag == 1)
+  return 1;
+ else
+ {
+  lasterr = mysql.getLastError();
+  return 0;
+ }
+}
+
+/**
+ * Exec DataBase Manager Language
+ * @param {Object} sql
+ */
+function execDMLMySQL(sql)
+{
+ execFlag = mysql.execDML(sql);
+ if(execFlag == 1)
+  return 0;
+ else
+ {
+  lasterr = mysql.getLastError();
+  return 0;
+ }
+}
+
+/**
+ * Exec Select Data From DataBase
+ * @param {Object} sql
+ * @param {Object} cnum == Number of fields in SQL statement
+ */
+function selectMySQL(sql,cnum)
+{
+ var rs = mysql.selectData(sql,cnum);
+ if(rs.length > 0)
+ {
+  var array = new Array();
+  var DataSet = new Array();
+  var rowsplit = '';//行间隔 ,注意，这并不是普通的'-',而是0x06 转换而来的，使用时拷贝过去即可
+  var fieldsplit ='';//字段间隔,注意，这并不是普通的'|',而是0x05 转换而来的，使用时拷贝过去即可
+
+  array = rs.split(rowsplit);
+  for(var i = 0;i < array.length; i++)
+  {
+   var DataRow = array[i].split(fieldsplit);
+   DataSet[i] = DataRow;
+  }
+  return DataSet;
+ }
+ else
+ {
+  lasterr = mysql.getLastError();
+  return null;
+ }
+}
+
+
+</script>
+
+
+
+</body>
+</html>
